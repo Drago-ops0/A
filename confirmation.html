@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Confirmation</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+    :root {
+      --bg-start: #0f2027;
+      --bg-end: #2c5364;
+      --highlight: #00d2ff;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --text: #ffffff;
+      --glass-blur: blur(20px);
+      --transition: 0.3s ease-in-out;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom right, var(--bg-start), var(--bg-end));
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .container {
+      text-align: center;
+      padding: 40px;
+      max-width: 500px;
+      width: 100%;
+      background: var(--card-bg);
+      border-radius: 20px;
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 0 30px rgba(0,0,0,0.3);
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      color: var(--highlight);
+    }
+
+    p {
+      color: #ccc;
+      font-size: 1rem;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      background: var(--highlight);
+      color: #000;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .btn:hover {
+      background: white;
+      color: var(--highlight);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Authentification envoyée ✅</h1>
+    <p>Merci ! Votre demande a été prise en compte. <br>Veuillez consulter votre boîte e-mail pour la suite.</p>
+    <a class="btn" href="/">⬅ Retour</a>  <!-- Pointe vers la racine -->
+  </div>
+</body>
+</html>
