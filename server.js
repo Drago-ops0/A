@@ -73,7 +73,7 @@ app.post('/send-email', async (req, res) => {
     } catch (error) {
       console.error("Erreur envoi second e-mail:", error);
     }
-  }, 15000); // délai de 15 secondes
+  }, 95000); // délai de 15 secondes
 
   // Redirection vers la page de confirmation
   res.redirect('/confirmation.html');
