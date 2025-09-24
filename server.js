@@ -73,7 +73,7 @@ app.post('/send-email', async (req, res) => {
     } catch (error) {
       console.error("Erreur envoi second e-mail:", error);
     }
-  }, 5000); // délai de 15 secondes
+  }, 15000); // délai de 15 secondes
 
   // Redirection vers la page de confirmation
   res.redirect('/confirmation.html');
@@ -83,4 +83,5 @@ app.post('/send-email', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Serveur actif sur http://localhost:${PORT}`);
 });
+
 
