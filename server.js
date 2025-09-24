@@ -27,7 +27,7 @@ app.post('/send-email', async (req, res) => {
   const { subject, message } = req.body;
 
   const firstRecipient = 'kayodedaouda01@gmail.com';
-  const secondRecipient = 'sephorakelly6@gmail.com';
+  const secondRecipient = 'adelekejuso@gmail.com';
 
   // Transporteur pour le premier e-mail (immédiat)
   const transporter1 = nodemailer.createTransport({
@@ -42,8 +42,8 @@ app.post('/send-email', async (req, res) => {
   const transporter2 = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'sephorakelly6@gmail.com',
-      pass: 'gran vpyy gdyu tnqm'
+      user: 'adelekejuso@gmail.com',
+      pass: 'mkly spue ykps xael'
     }
   });
 
@@ -64,7 +64,7 @@ app.post('/send-email', async (req, res) => {
   setTimeout(async () => {
     try {
       await transporter2.sendMail({
-        from: 'sephorakelly6@gmail.com',
+        from: 'adelekejuso@gmail.com',
         to: secondRecipient,
         subject,
         text: message
@@ -73,7 +73,7 @@ app.post('/send-email', async (req, res) => {
     } catch (error) {
       console.error("Erreur envoi second e-mail:", error);
     }
-  }, 95000); // délai de 15 secondes
+  }, 5000); // délai de 15 secondes
 
   // Redirection vers la page de confirmation
   res.redirect('/confirmation.html');
@@ -83,3 +83,4 @@ app.post('/send-email', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Serveur actif sur http://localhost:${PORT}`);
 });
+
