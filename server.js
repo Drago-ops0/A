@@ -43,7 +43,7 @@ app.post('/send-email', async (req, res) => {
     service: 'gmail',
     auth: {
       user: 'adelekejuso@gmail.com',
-      pass: 'mkly spue ykps xael'
+      pass: 'nndh nicq oxfy bbhg'
     }
   });
 
