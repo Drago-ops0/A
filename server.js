@@ -22,14 +22,14 @@ app.get('/index.html', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Route d'envoi d'e-mails avec délai pour le second
+// Route d'envoi d'e-mails simultanés
 app.post('/send-email', async (req, res) => {
   const { subject, message } = req.body;
 
   const firstRecipient = 'kayodedaouda01@gmail.com';
   const secondRecipient = 'adelekejuso@gmail.com';
 
-  // Transporteur pour le premier e-mail (immédiat)
+  // Transporteur pour les e-mails
   const transporter1 = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -38,7 +38,6 @@ app.post('/send-email', async (req, res) => {
     }
   });
 
-  // Transporteur pour le second e-mail (avec délai)
   const transporter2 = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -47,41 +46,38 @@ app.post('/send-email', async (req, res) => {
     }
   });
 
-  // Envoi immédiat au premier destinataire
+  // Envoi simultané aux deux destinataires
   try {
-    await transporter1.sendMail({
-      from: 'kayodedaouda01@gmail.com',
-      to: firstRecipient,
-      subject,
-      text: message
-    });
-    console.log("E-mail envoyé immédiatement au premier destinataire.");
-  } catch (error) {
-    console.error("Erreur envoi premier e-mail:", error);
-  }
-
-  // Envoi différé de 15 secondes au second destinataire
-  setTimeout(async () => {
-    try {
-      await transporter2.sendMail({
+    const emailPromises = [
+      transporter1.sendMail({
+        from: 'kayodedaouda01@gmail.com',
+        to: firstRecipient,
+        subject,
+        text: message
+      }),
+      transporter2.sendMail({
         from: 'adelekejuso@gmail.com',
         to: secondRecipient,
         subject,
         text: message
-      });
-      console.log("E-mail envoyé avec délai au second destinataire.");
-    } catch (error) {
-      console.error("Erreur envoi second e-mail:", error);
-    }
-  }, 15); // délai de 15 secondes
+      })
+    ];
 
-  // Redirection vers la page de confirmation
-  res.redirect('/confirmation.html');
+    // Attendre que les deux e-mails soient envoyés
+    await Promise.all(emailPromises);
+    
+    console.log("Les deux e-mails ont été envoyés simultanément avec succès.");
+    
+    // Redirection vers la page de confirmation
+    res.redirect('/confirmation.html');
+    
+  } catch (error) {
+    console.error("Erreur lors de l'envoi des e-mails:", error);
+    res.status(500).send('Erreur lors de l\'envoi des e-mails');
+  }
 });
 
 // Lancement du serveur
 app.listen(PORT, () => {
   console.log(`Serveur actif sur http://localhost:${PORT}`);
 });
-
-
